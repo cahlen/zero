@@ -1,0 +1,30 @@
+{
+  "version": "0.1.0",
+  "release_date": "2024-12-27",
+  "min_version": "0.1.0",
+  "components": {
+    "wifi-portal": {
+      "version": "0.1.0",
+      "path": "apps/wifi-portal/",
+      "restart_service": "zero-wifi-portal"
+    },
+    "web": {
+      "version": "0.1.0", 
+      "path": "apps/web/",
+      "restart_service": "zero-webapp"
+    },
+    "display": {
+      "version": "0.1.0",
+      "path": "apps/display/",
+      "restart_service": "zero-display"
+    },
+    "scripts": {
+      "version": "0.1.0",
+      "path": "scripts/",
+      "restart_service": null
+    }
+  },
+  "changelog": [
+    "Initial release"
+  ]
+}

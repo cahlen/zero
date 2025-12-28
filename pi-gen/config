@@ -1,0 +1,41 @@
+# pi-gen configuration for Zero custom image
+# See https://github.com/RPi-Distro/pi-gen for documentation
+
+# Image name
+IMG_NAME=zero
+
+# Hostname
+TARGET_HOSTNAME=zero
+
+# First user (will be created during build)
+FIRST_USER_NAME=zero
+FIRST_USER_PASS=zero
+
+# Locale settings
+LOCALE_DEFAULT=en_US.UTF-8
+KEYBOARD_KEYMAP=us
+KEYBOARD_LAYOUT="English (US)"
+TIMEZONE_DEFAULT=America/New_York
+
+# Enable SSH by default
+ENABLE_SSH=1
+
+# Use NetworkManager (required for WiFi portal)
+NETWORK_MANAGER=1
+
+# Build stages to include
+# Stage 0: Bootstrap
+# Stage 1: Minimal system
+# Stage 2: Lite system (our base)
+# Stage-zero: Our custom additions
+STAGE_LIST="stage0 stage1 stage2 stage-zero"
+
+# Don't compress (faster builds during development)
+# Set to 1 for production
+DEPLOY_COMPRESSION=none
+
+# Clean up APT cache
+APT_CACHE_SIZE=0
+
+# WiFi country code
+WPA_COUNTRY=US

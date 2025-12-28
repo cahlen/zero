@@ -1,0 +1,22 @@
+[Unit]
+Description=Zero Display Application
+After=local-fs.target
+ConditionPathExists=/etc/zero/.wifi_configured
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/zero/display
+Environment="SDL_VIDEODRIVER=fbcon"
+Environment="SDL_FBDEV=/dev/fb0"
+Environment="PATH=/opt/zero/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+EnvironmentFile=-/etc/zero/secrets.env
+ExecStart=/opt/zero/.venv/bin/python app.py
+Restart=always
+RestartSec=10
+
+# Give access to framebuffer
+SupplementaryGroups=video
+
+[Install]
+WantedBy=multi-user.target

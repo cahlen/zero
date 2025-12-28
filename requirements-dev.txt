@@ -1,0 +1,18 @@
+# Development dependencies
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
+
+# App dependencies (for local testing)
+flask>=3.0.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+jinja2>=3.1.0
+
+# AI SDKs (optional, for testing)
+openai>=1.0.0
+anthropic>=0.18.0
+google-generativeai>=0.3.0
+groq>=0.4.0

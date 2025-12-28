@@ -1,0 +1,14 @@
+[Unit]
+Description=Zero OTA Update Check Timer
+After=network-online.target
+
+[Timer]
+# Check for updates daily at 3 AM
+OnCalendar=*-*-* 03:00:00
+# Randomize start time by up to 1 hour to avoid thundering herd
+RandomizedDelaySec=3600
+# Run on boot if we missed the last scheduled time
+Persistent=true
+
+[Install]
+WantedBy=timers.target

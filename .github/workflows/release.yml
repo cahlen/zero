@@ -1,0 +1,53 @@
+name: Build Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Get version
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      
+      - name: Build release tarball
+        run: |
+          mkdir -p build/release
+          
+          # Copy apps
+          cp -r apps build/release/
+          
+          # Copy update scripts
+          mkdir -p build/release/scripts
+          cp scripts/update.sh build/release/scripts/
+          cp scripts/provision.sh build/release/scripts/
+          
+          # Copy manifest and version
+          mkdir -p build/release/updates
+          cp updates/manifest.json build/release/updates/
+          cp VERSION build/release/
+          
+          # Create tarball
+          cd build/release
+          tar -czvf ../zero-${{ steps.version.outputs.VERSION }}.tar.gz .
+          
+          # Checksum
+          cd ..
+          sha256sum zero-${{ steps.version.outputs.VERSION }}.tar.gz > zero-${{ steps.version.outputs.VERSION }}.tar.gz.sha256
+      
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/zero-${{ steps.version.outputs.VERSION }}.tar.gz
+            build/zero-${{ steps.version.outputs.VERSION }}.tar.gz.sha256
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

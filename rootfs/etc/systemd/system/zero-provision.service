@@ -1,0 +1,13 @@
+[Unit]
+Description=Zero First Boot Provisioning
+After=network.target
+ConditionPathExists=!/etc/zero/.provisioned
+
+[Service]
+Type=oneshot
+ExecStart=/opt/zero/scripts/provision.sh
+ExecStartPost=/bin/touch /etc/zero/.provisioned
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
